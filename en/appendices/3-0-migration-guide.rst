@@ -937,8 +937,9 @@ and reduce the problems people had in the past:
   by default. This helps increase compatibility with popular CSS libraries like
   `Bootstrap <http://getbootstrap.com/>`_ and
   `Foundation <http://foundation.zurb.com/>`_.
-- The template keys ``formStart``, ``formEnd``, ``inputSubmit`` and ``hiddenBlock`` have been adjusted
-to camelBacked format to be consistent with the rest of the templates.
+- The template keys ``formStart``, ``formEnd``, ``inputSubmit`` and
+  ``hiddenBlock`` have been adjusted to camelBacked format to be consistent
+  with the rest of the templates.
 
 It is recommended that you review the :doc:`/views/helpers/form`
 documentation for more details on how to use the FormHelper in 3.0.

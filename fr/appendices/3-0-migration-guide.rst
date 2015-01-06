@@ -1036,6 +1036,9 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
   compatibilité avec les librairies CSS populaires telles que
   `Bootstrap <http://getbootstrap.com/>`_ et
   `Foundation <http://foundation.zurb.com/>`_.
+- Les clés de template ``formStart``, ``formEnd``, ``inputSubmit`` et
+  ``hiddenBlock`` ont été ajustées au format camelBacked pour être cohérent avec
+  le reste des templates.
 
 Il est recommandé que vous regardiez la documentation
 :doc:`/views/helpers/form` pour plus de détails sur la façon d'utiliser
