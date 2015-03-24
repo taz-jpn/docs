@@ -1,4 +1,4 @@
-New ORM Upgrade Guide
+新ORMアップグレードガイド
 #####################
 
 CakePHPの3.0は、始めから書きなおされた新しいORMを備えています。
@@ -6,7 +6,7 @@ CakePHPの3.0は、始めから書きなおされた新しいORMを備えてい�
 
 * フランケンシュタイン - レコードか、テーブルか？現状は両方です。
 * 一貫性のないAPI - Model::read() の様な。
-* オブジェクトでないクエリー - クエリーが配列で意義されることにより、いくつかの
+* オブジェクトでないクエリー - クエリーが配列で定義されることにより、いくつかの
   制限や制約があります。例えば、ユニオンやサブクエリーを定義することがとても
   難しいです。
 * 返り値が配列。これは、CakePHPにおける共通の不満で、おそらくいくつかの水準で
@@ -16,16 +16,14 @@ CakePHPの3.0は、始めから書きなおされた新しいORMを備えてい�
   はありません。
 * Recursive - これは関連付けを含む定義として、きちんと制御されるべきで、再帰性
   のレベルで制御するべきではありません。
-* DboSource - それは獣だ。データーソースよりModelに依存する。それらの区別は、
-  もっと
-* DboSource - It is a beast, and Model relies on it more than datasource.  That
-  separation could be cleaner and simpler.
-* Validation - Should be separate, it's a giant crazy function right now.  Making
-  it a reusable bit would make the framework more extensible.
+* DboSource - それは獣だ。Modelはデーターソースよりそれに依存する。それらの分離
+  は、もっとクリーンで簡単な可能性があります。
+* Validation - は分離するべきです、現状はバカでかい関数になっています。少し
+  再利用性をつけると、フレームワークはもっと拡張性を持ちます。
 
-The ORM in CakePHP 3.0 solves these and many more problems. The new ORM
-focuses on relational data stores right now. In the future and through plugins
-we will add non relational stores like ElasticSearch and others.
+CakePHP 3.0のORMは、これらの項目とより多くの問題を解決します。今回、新ORMは
+リレーショナルデータストアに注力しています。将来的には、プラグインを通して
+我々はElasticSearchなどのような非リレーショナルストアを追加します。
 
 Design of the New ORM
 =====================
