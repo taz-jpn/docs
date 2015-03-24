@@ -25,35 +25,35 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 リレーショナルデータストアに注力しています。将来的には、プラグインを通して
 我々はElasticSearchなどのような非リレーショナルストアを追加します。
 
-Design of the New ORM
+新ORMのデザイン
 =====================
 
-The new ORM solves several problems by having more specialized and focused
-classes. In the past you would use ``Model`` and a Datasource for all
-operations. Now the ORM is split into more layers:
+新ORMは、いくつかの、より特化された、フォーカスされたクラスの問題を解決します。
+かつては、``Model`` やDatasourceをすべてのオペレーションで使っていたでしょう。
+今回、ORMはより多くのレイヤーに分離しました:
 
-* ``Cake\Database\Connection`` - Provides a platform independent way to create
-  and use connections. This class provides a way to use transactions,
-  execute queries and access schema data.
-* ``Cake\Database\Dialect`` - The classes in this namespace provide platform
-  specific SQL and transform queries to work around platform specific
-  limitations.
-* ``Cake\Database\Type`` - Is the gateway class to CakePHP database type
-  conversion system. It is a pluggable framework for adding abstract column
-  types and providing mappings between database,  PHP representations and PDO
-  bindings for each data type. For example datetime columns are represented as
-  ``DateTime`` instances in your code now.
-* ``Cake\ORM\Table`` - The main entry point into the new ORM. Provides access
-  to a single table. Handles the definition of assocation, use of behaviors and
-  creation of entities and query objects.
-* ``Cake\ORM\Behavior`` - The base class for behaviors, which act very similar
-  to behaviors in previous versions of CakePHP.
-* ``Cake\ORM\Query`` - A fluent object based query builder that replaces
-  the deeply nested arrays used in previous versions of CakePHP.
-* ``Cake\ORM\ResultSet`` - A collection of results that gives powerful tools
-  for manipulating data in aggregate.
-* ``Cake\ORM\Entity`` - Represents a single row result. Makes accessing data
-  and serializing to various formats a snap.
+* ``Cake\Database\Connection`` - コネクションを生成し利用する方法の革命的な
+  プラットフォームを提供します。このクラスは、トランザクション、クエリーの実行
+  およびスキーマデータへのアクセスを提供します。
+* ``Cake\Database\Dialect`` - この名前空間内のクラスは、プラットフォーム特化
+  SQLの提供と、プラットフォーム特化の制限廻りで動作するクエリーの変換をします。
+* ``Cake\Database\Type`` - CakePHPのデータベースタイプ変換システムのゲート
+  ウェイクラスです。これは着脱可能なフォレームワークで、抽象的カラムタイプの
+  追加と、データベース、PHP表現とデータタイプのためのPDO結合間のマッピングを
+  提供します。例えば、datetimeカラムは、コード中において``DateTime`インスタンス
+  として表現されます。
+* ``Cake\ORM\Table`` - 新ORMのメインな導入ポイントです。シングルテーブルへの
+  アクセスを提供します。アソシエーション定義、ビヘイビアの利用とエンティティの
+  生成ならびに、クエリーオブジェクトを扱います。
+* ``Cake\ORM\Behavior`` - ビヘイビアのベースクラスです、旧バージョンのCakePHP
+  のビヘイビアと同等に動作します。
+* ``Cake\ORM\Query`` - クエリービルダーベースのfluentオブジェクトです、旧
+  バージョンのCakePHPにおいて、深くネストされた配列であったのもに置き換わる
+  オブジェクトです。
+* ``Cake\ORM\ResultSet`` - 結果のコレクションです、集計データの操作において
+  強力なツールを提供します。
+* ``Cake\ORM\Entity`` - シングルレコードの結果を生成します。データへのアクセス
+  と、snapを様々なフォーマットにシリアライズします。
 
 Now that you are more familiar with some of the classes you'll interact with
 most frequently in the new ORM it is good to look at the three most important
