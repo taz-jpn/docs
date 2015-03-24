@@ -37,9 +37,9 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
   およびスキーマデータへのアクセスを提供します。
 * ``Cake\Database\Dialect`` - この名前空間内のクラスは、プラットフォーム特化
   SQLの提供と、プラットフォーム特化の制限廻りで動作するクエリーの変換をします。
-* ``Cake\Database\Type`` - CakePHPのデータベースタイプ変換システムのゲート
+* ``Cake\Database\Type`` - CakePHPのデーターベースタイプ変換システムのゲート
   ウェイクラスです。これは着脱可能なフォレームワークで、抽象的カラムタイプの
-  追加と、データベース、PHP表現とデータタイプのためのPDO結合間のマッピングを
+  追加と、データベース、PHP表現とデータータイプのためのPDO結合間のマッピングを
   提供します。例えば、datetimeカラムは、コード中において``DateTime`インスタンス
   として表現されます。
 * ``Cake\ORM\Table`` - 新ORMのメインな導入ポイントです。シングルテーブルへの
@@ -52,49 +52,50 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
   オブジェクトです。
 * ``Cake\ORM\ResultSet`` - 結果のコレクションです、集計データの操作において
   強力なツールを提供します。
-* ``Cake\ORM\Entity`` - シングルレコードの結果を生成します。データへのアクセス
+* ``Cake\ORM\Entity`` - シングルレコードの結果を生成します。データーへのアクセス
   と、snapを様々なフォーマットにシリアライズします。
 
-Now that you are more familiar with some of the classes you'll interact with
-most frequently in the new ORM it is good to look at the three most important
-classes. The ``Table``, ``Query`` and ``Entity`` classes do much of the heavy
-lifting in the new ORM, and each serves a different purpose.
+ここで、あなたはいくつかのクラスにより精通します、新ORMにおいて最も頻繁に相互
+作用する、もっとも重要な3つのクラスについて見ていきます。``Table``、 ``Query``
+および``Entity``クラスは、新ORMにおいて多くの力仕事を行い、それぞれ異なる役目
+があります。
 
-Table Objects
+テーブルオブジェクト
 -------------
 
-Table objects are the gateway into your data. They handle many of the tasks that
-``Model`` did in previous releases. Table classes handle tasks like:
+テーブルオブジェクトは、データーへのゲートウェイです。それらは、旧バージョンの
+``Model``が行っていた多くのタスクを扱います。テーブルクラスは、以下の様なタスク
+を扱います:
 
-- Creating queries.
-- Providing finders.
-- Validating and saving entities.
-- Deleting entities.
-- Defining & accessing associations.
-- Triggering callback events.
-- Interacting with behaviors.
+- クエリーの生成。
+- ファインダーの提供。
+- エンティティーのバリデートとセーブ。
+- エンティティーの削除。
+- アソシエーションの定義とアクセス。
+- コールバックイベントのトリガー。
+- ビヘイビアとの対話。
 
-The documentation chapter on :doc:`/orm/table-objects` provides far more detail
-on how to use table objects than this guide can. Generally when moving existing
-model code over it will end up in a table object. Table objects don't contain
-any platform dependent SQL. Instead they collaborate with entities and the query
-builder to do their work. Table objects also interact with behaviors and other
-interested parties through published events.
+ドキュメントのチャプター:doc:`/orm/table-objects`では、テーブルオブジェクトに
+ついて本ガイドより詳細な使い方を解説しています。一般的には、既存のモデルコード
+を移動する場合は、テーブルオブジェクトになるでしょう。テーブルオブジェクトは、
+プラットフォームに依存SQLは含みません。代わりに、エンティティーとクエリービル
+ダーと併せて使用します。テーブルオブジェクトは、公開されたイベントを通じて、
+ビヘイビアとその他関連処理とも相互作用します。
 
-Query Objects
+クエリーオブジェクト
 -------------
 
-While these are not classes you will build yourself, your application code will
-make extensive use of the :doc:`/orm/query-builder` which is central to the new
-ORM. The query builder makes it easy to build simple or complex queries
-including those that were previously very difficult in CakePHP like ``HAVING``,
-``UNION`` and sub-queries.
+これらはあなた自身を構築するクラスはありませんが、あなたのアプリケーション
+コードは新ORMの中心であるクエリービルダーを広範囲に使用していきます。
+クエリービルダーは、単純クエリーも複雑なクエリー構築も、簡単にします、それは
+以前はCakePHPにおいて非常に難しかった ``HAVING``、``UNION``およびサブクエリー
+も含みます。
 
-The various find() calls your application has currently will need to be updated
-to use the new query builder. The Query object is responsible for containing the
-data to make a query without executing the query itself. It collaborates with
-the connection/dialect to generate platform specific SQL which is executed
-creating a ``ResultSet`` as the output.
+あなたのアプリケーションを呼ぶ様々なfind()は、現状は、新しいクエリービ
+ルダーを使う様アップデートする必要があるでしょう。クエリーオブジェクトは、
+クエリーを実行する以外の、クエリーを構築するデーターを含めて責任を持ちます。
+これは、プラットフォームの出力として`` ResultSet``の作成が実行される特定のSQLを
+生成するために、接続/方言とのコラボレーション。
 
 Entity Objects
 --------------
