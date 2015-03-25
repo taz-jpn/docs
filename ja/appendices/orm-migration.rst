@@ -1,4 +1,4 @@
-新ORMアップグレードガイド
+新しいORMアップグレードガイド
 #####################
 
 CakePHPの3.0は、始めから書きなおされた新しいORMを備えています。
@@ -21,14 +21,14 @@ CakePHPの3.0は、始めから書きなおされた新しいORMを備えてい�
 * Validation - は分離するべきです、現状はバカでかい関数になっています。少し
   再利用性をつけると、フレームワークはもっと拡張性を持ちます。
 
-CakePHP 3.0のORMは、これらの項目とより多くの問題を解決します。今回、新ORMは
-リレーショナルデータストアに注力しています。将来的には、プラグインを通して
+CakePHP 3.0のORMは、これらの項目とより多くの問題を解決します。今回、新しいORMは
+リレーショナルデータストアに注力しています。将来的には、プラグインを通して、
 我々はElasticSearchなどのような非リレーショナルストアを追加します。
 
-新ORMのデザイン
+新しいORMのデザイン
 =====================
 
-新ORMは、いくつかの、より特化された、フォーカスされたクラスの問題を解決します。
+新しいORMは、いくつかの、より特化された、フォーカスされたクラスの問題を解決します。
 かつては、``Model`` やDatasourceをすべてのオペレーションで使っていたでしょう。
 今回、ORMはより多くのレイヤーに分離しました:
 
@@ -42,7 +42,7 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
   追加と、データベース、PHP表現とデータータイプのためのPDO結合間のマッピングを
   提供します。例えば、datetimeカラムは、コード中において``DateTime`インスタンス
   として表現されます。
-* ``Cake\ORM\Table`` - 新ORMのメインな導入ポイントです。シングルテーブルへの
+* ``Cake\ORM\Table`` - 新しいORMのメインな導入ポイントです。シングルテーブルへの
   アクセスを提供します。アソシエーション定義、ビヘイビアの利用とエンティティの
   生成ならびに、クエリーオブジェクトを扱います。
 * ``Cake\ORM\Behavior`` - ビヘイビアのベースクラスです、旧バージョンのCakePHP
@@ -55,9 +55,9 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 * ``Cake\ORM\Entity`` - シングルレコードの結果を生成します。データーへのアクセス
   と、snapを様々なフォーマットにシリアライズします。
 
-ここで、あなたはいくつかのクラスにより精通します、新ORMにおいて最も頻繁に相互
+ここで、あなたはいくつかのクラスにより精通します、新しいORMにおいて最も頻繁に相互
 作用する、もっとも重要な3つのクラスについて見ていきます。``Table``、 ``Query``
-および``Entity``クラスは、新ORMにおいて多くの力仕事を行い、それぞれ異なる役目
+および``Entity``クラスは、新しいORMにおいて多くの力仕事を行い、それぞれ異なる役目
 があります。
 
 テーブルオブジェクト
@@ -86,7 +86,7 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 -------------
 
 これらはあなた自身を構築するクラスはありませんが、あなたのアプリケーション
-コードは新ORMの中心であるクエリービルダーを広範囲に使用していきます。
+コードは新しいORMの中心であるクエリービルダーを広範囲に使用していきます。
 クエリービルダーは、単純クエリーも複雑なクエリー構築も、簡単にします、それは
 以前はCakePHPにおいて非常に難しかった ``HAVING``、``UNION``およびサブクエリー
 も含みます。
@@ -97,21 +97,20 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 これは、プラットフォームの出力として`` ResultSet``の作成が実行される特定のSQLを
 生成するために、接続/方言とのコラボレーション。
 
-Entity Objects
+エンティティオブジェクト
 --------------
 
-In previous versions of CakePHP the ``Model`` class returned dumb arrays that
-could not contain any logic or behavior. While the community made this
-short-coming less painful with projects like CakeEntity, the array results were
-often a short coming that caused many developers trouble. For CakePHP 3.0, the
-ORM always returns object result sets unless you explicitly disable that
-feature. The chapter on :doc:`/orm/entities` covers the various tasks you can
-accomplish with entities.
+旧バージョンのCakePHPにおいて、 ``Model`` クラスは、ロジックやビヘイビアを含まな
+い様な、ダメな配列を返しました。一方でコミュニティは、CakeEntityのようなプロジェ
+クトにより、この欠点を致命的でないものにしました、配列の返り値は、しばしば多くの
+開発者のトラブルの原因となる欠点でした。CakePHP 3.0のために、明示的に無効にしない
+限りは常に、ORMはオブジェクトのリザルトセットを返します。:doc:`/orm/entities`の
+章は、あなたがエンティティで到達できる様々なタスクをカバーします。
 
-Entities are created in one of two ways. Either by loading data from the
-database, or converting request data into entities. Once created, entities allow
-you to manipulate the data they contain and persist their data by collaborating
-with table objects.
+エンティティは次のいずれかの方法により作られました。それは、データーベースから
+データーをロードするか、リクエストデーターをエンティティに変換するかです。
+一度構築されると、エンティティはあなたに、データーの操作を許可します、それらの
+データーは、テーブルオブジェクト連携しデーターを含み持ち続けます。
 
 Key Differences
 ===============
