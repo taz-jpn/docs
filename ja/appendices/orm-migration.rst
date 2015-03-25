@@ -75,7 +75,7 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 - コールバックイベントのトリガー。
 - ビヘイビアとの対話。
 
-ドキュメントのチャプター:doc:`/orm/table-objects`では、テーブルオブジェクトに
+ドキュメントのチャプター :doc:`/orm/table-objects` では、テーブルオブジェクトに
 ついて本ガイドより詳細な使い方を解説しています。一般的には、既存のモデルコード
 を移動する場合は、テーブルオブジェクトになるでしょう。テーブルオブジェクトは、
 プラットフォームに依存SQLは含みません。代わりに、エンティティーとクエリービル
@@ -104,7 +104,7 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 い様な、ダメな配列を返しました。一方でコミュニティは、CakeEntityのようなプロジェ
 クトにより、この欠点を致命的でないものにしました、配列の返り値は、しばしば多くの
 開発者のトラブルの原因となる欠点でした。CakePHP 3.0のために、明示的に無効にしない
-限りは常に、ORMはオブジェクトのリザルトセットを返します。:doc:`/orm/entities`の
+限りは常に、ORMはオブジェクトのリザルトセットを返します。 :doc:`/orm/entities` の
 章は、あなたがエンティティで到達できる様々なタスクをカバーします。
 
 エンティティは次のいずれかの方法により作られました。それは、データーベースから
@@ -112,42 +112,41 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
 一度構築されると、エンティティはあなたに、データーの操作を許可します、それらの
 データーは、テーブルオブジェクト連携しデーターを含み持ち続けます。
 
-Key Differences
+主な相違点
 ===============
 
-The new ORM is a large departure from the existing ``Model`` layer, there are
-many important differences that are important in understanding how the new ORM
-operates and how to update your code.
+新しいORMは既存の ``Model`` レイヤーから大きく逸脱しています、新しいORMのオペ
+レーションやあなたのコードをアップデートする方法を理解するための、多くの重要な
+相違点があります。
 
-Inflection Rules Updated
+語尾変化ルールのアップデート
 ------------------------
 
-You may have noticed that table classes have a pluralized name. In addition to
-tables having pluralized names, associations are also referred in the plural
-form. This is in contrast to ``Model`` where class names and association aliases
-were singular. There are a few reasons for this change:
+あなたは、テーブルクラスが複数形の名前を持つことに気づいていたかも知れません。
+テーブルが複数形の名前を持つことに加えて、アソシエーションも複数形で呼ばれます。
+クラス名とアソシエーションエイリアスが単数形であったことは、 ``Model`` とは
+対照的です。この変更には次のような理由があります:
 
-* Table classes represent **collections** of data, not single rows.
-* Associations link tables together, describing the relations between many
-  things.
+* テーブルクラスは **collections** のデータとして表現されます、単一行ではなく。
+* アソシエーションリンクテーブル同士は、多くのものとのリレーションを記述している。
 
-While the conventions for table objects are to always use plural forms, your
-entity association properties will be populated based on the association type.
+テーブルオブジェクトの表記は複数形である一方で、エンティティアソシエーションプロ
+パティは、アソシエーションタイプに基づいて取り込まれます。
 
 .. note::
 
-    BelongsTo and HasOne associations will use the singular form in entity
-    properties, while HasMany and BelongsToMany (HABTM) will use plural forms.
+    BelongsToとHasOneアソシエーションは、 エンティティプロパティにおいて単数形を
+    使い、HasManyとBelongsToMany (HABTM)は複数形を使います。 
 
-The convention change for table objects is most apparent when building queries.
-Instead of expressing queries like::
+テーブルオブジェクトの表記変更は、クエリー構築時は最も明らかです。
+クエリーを次のように表記する代わりに::
 
-    // Wrong
+    // 誤
     $query->where(['User.active' => 1]);
 
-You need to use the plural form::
+あなたは複数形を使う必要があります::
 
-    // Correct
+    // 正
     $query->where(['Users.active' => 1]);
 
 Find returns a Query Object
