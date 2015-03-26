@@ -213,18 +213,18 @@ CakePHP 2.xからの最も大きな相違点は、 ``find('first')`` はもう�
         ->where(['author_id' => 1])
         ->first();
 
-If you are a loading a single record by its primary key, it will be better to
-just call ``get()``::
+あなたがシングルレコードをプライマリーキーで取得する場合は、単に ``get()`` を呼
+べば良いです::
 
     $article = $this->Articles->get(10);
 
-Finder Method Changes
+ファインダーメソッドの変更点
 ---------------------
 
-Returning a query object from a find method has several advantages, but comes at
-a cost for people migrating from 2.x. If you had some custom find methods in
-your models, they will need some modifications. This is how you create custom
-finder methods in 3.0::
+findメソッドからクエリーオブジェクトが返ることは、いくつかの利点が有りますが、
+2.x.からの移行の手間が掛かります。もし、Modelにカスタムfindメソッドがある場合は、
+それらの変更も必要になるでしょう。これは3.0におけるファインダーメソッドの作り方
+です::
 
     class ArticlesTable
     {
@@ -243,18 +243,17 @@ finder methods in 3.0::
         }
     }
 
-As you can see, they are pretty straightforward, they get a Query object instead
-of an array and must return a Query object back. For 2.x users that implemented
-afterFind logic in custom finders, you should check out the :ref:`map-reduce`
-section, or use the features found on the :ref:`collection-objects`. If in your
-models you used to rely on having an afterFind for all find operations you can
-migrate this code in one of a few ways:
+ご覧のとおり、とても単純明快です、配列の代わりにオブジェクトを使い、オブジェクト
+で返します。カスタムファインダーにafterFindロジックを入れていた2.xユーザーは、
+ :ref:`map-reduce` の章を参照して下さい、もしくは :ref:`collection-objects` の
+機能を使って下さい。もしあなたのモデルにおいて、すべてのfind処理にafterFindを含む
+のであれば、次のいずれかの方法で移行することができます:
 
-1. Override your entity constructor method and do additional formatting there.
-2. Create accessor methods in your entity to create the virtual properties.
-3. Redefine ``findAll()`` and attach a map/reduce function.
+1. エンティティーのconstructorメソッドをオーバーライドして、追加の書式設定をします。
+2. バーチャルプロパティを作るため、エンティティーにaccessorメソッド作成します。
+3.  ``findAll()`` を再定義し map/reduce 関数に結びつけます。
 
-In the 3rd case above your code would look like::
+上の3番目の手法は次のようになるでしょう::
 
     public function findAll(Query $query, array $options)
     {
@@ -264,13 +263,12 @@ In the 3rd case above your code would look like::
         return $query->mapReduce($mapper);
     }
 
-You may have noticed that custom finders receive an options array, you can pass
-any extra information to your finder using this parameter. This is great
-news for people migrating from 2.x. Any of the query keys that were used in
-previous versions will be converted automatically for you in 3.x to the correct
-functions::
+あなたは、カスタムファインダーがoptions配列を受け取ることに気づいているかもしれま
+せん、このパラメーターを使ってファインダーに追加情報を渡すことができます。これは
+2.x.から移行する人にとって素晴らしいことです。旧バージョンで使っていた全てのクエ
+リーキーは、3.xの正しい関数へ自動的に変換されるでしょう::
 
-    // This works in both CakePHP 2.x and 3.0
+    // これは CakePHP 2.x and 3.0 の両方で動きます
     $articles = $this->Articles->find('all', [
         'fields' => ['id', 'title'],
         'conditions' => [
@@ -282,16 +280,15 @@ functions::
         'limit' => 10,
     ]);
 
-Hopefully, migrating from older versions is not as daunting as it first seems,
-much of the features we have added helps you remove code as you can better
-express your requirements using the new ORM and at the same time the
-compatibility wrappers will help you rewrite those tiny differences in a fast
-and painless way.
+願わくば、旧バージョンからの移行は、最初に思ったほど困難ではなく、私達が追加した
+多くの機能が、あなたがコードを減らすのを助け、新しいORMを使って要件をうまく表現す
+ることができ、同時に互換ラッパーが、迅速かつ痛みのない方法で、小さな相違点を書き
+直すのを助けます。
 
-One of the other nice improvements in 3.x around finder methods is that
-behaviors can implement finder methods with no fuss. By simply defining a method
-with a matching name and signature on a Behavior the finder will automatically
-be available on any tables the behavior is attached to.
+ファインダーメソッド廻りの3.xの他の優れた改善点の1つは、ビヘイビアが難なくファイ
+ンダーメソッドを実装できることです。ビヘイビア上に、一致する名前とシグネチャーを
+持つメソッドを単純に定義することで、ファインダーは自動的に、ビヘイビアが接続され
+ている全てのテーブル上で利用可能になります。
 
 Recursive and ContainableBehavior Removed
 -----------------------------------------
