@@ -185,31 +185,30 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
             return $results->extract('title');
         });
 
-Queries can be seen as the result object, trying to iterate the query, calling
-``toArray`` or any method inherited from :ref:`collection <collection-objects>`,
-will result in the query being executed and results returned to you.
+結果オブジェクトとして見ることが出来るクエリー、反復しようとするクエリー、
+``toArray`` 呼び出しや他の  :ref:`collection <collection-objects>` から継承されたメソッド呼び出しは、
+クエリーが実行されあなたに結果が返される時点で発生します。
 
-The biggest difference you will find when coming from CakePHP 2.x is that
-``find('first')`` does not exist anymore. There is a trivial replacement for it,
-and it is the ``first()`` method::
+CakePHP 2.xからの最も大きな相違点は、 ``find('first')`` はもう存在しないというこ
+とで確認出来るでしょう。そのささいな代わりとして、  ``first()`` メソッドがあります::
 
-    // Before
+    // 旧
     $article = $this->Article->find('first');
 
-    // Now
+    // 新
     $article = $this->Articles->find()->first();
 
-    // Before
+    // 旧
     $article = $this->Article->find('first', [
         'conditions' => ['author_id' => 1]
     ]);
 
-    // Now
+    // 新
     $article = $this->Articles->find('all', [
         'conditions' => ['author_id' => 1]
     ])->first();
 
-    // Can also be written
+    // もしくはこうも書けます
     $article = $this->Articles->find()
         ->where(['author_id' => 1])
         ->first();
