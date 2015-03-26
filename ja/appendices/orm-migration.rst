@@ -149,37 +149,36 @@ CakePHP 3.0のORMは、これらの項目とより多くの問題を解決しま
     // 正
     $query->where(['Users.active' => 1]);
 
-Find returns a Query Object
+クエリーオブジェクトを返すFind
 ---------------------------
 
-One important difference in the new ORM is that calling ``find`` on a table will
-not return the results immediately, but will return a Query object; this serves
-several purposes.
+新しいORMの1つの大きな違いは、テーブルに ``find`` 呼び出しをしてもすぐには結果を
+返さないことです、結果はクエリーオブジェクトとして返します; これにはいくつかの
+目的があります。
 
-It is possible to alter queries further, after calling ``find``::
+これは、findを呼び出した後に、さらにクエリを変更することを可能にします::
 
     $articles = TableRegistry::get('Articles');
     $query = $articles->find();
     $query->where(['author_id' => 1])->order(['title' => 'DESC']);
 
-It is possible to stack custom finders to append conditions, sorting, limit and
-any other clause to the same query before it is executed::
+それは、条件、ソート、制限、そのほか色々な句を追加するためのカスタムファインダー
+を、同じクエリーに実行前にスタックすることを可能にします::
 
     $query = $articles->find('approved')->find('popular');
     $query->find('latest');
 
-You can compose queries one into the other to create subqueries easier than
-ever::
+あなたは、より簡単にサブクエリーを作るためのクエリーを構成することが出来ます::
 
     $query = $articles->find('approved');
     $favoritesQuery = $article->find('favorites', ['for' => $user]);
     $query->where(['id' => $favoritesQuery->select(['id'])]);
 
-You can decorate queries with iterators and call methods without even touching
-the database, this is great when you have parts of your view cached and having
-the results taken from the database is not actually required::
+あなたは、データベースに触れることなく、イテレータとメソッド呼び出しを持つクエリ
+を作ることができます、これはキャッシュされたビューのパーツがあると大いに役立ちま
+す、データベースから取得する結果は、実際には必要としません::
 
-    // No queries made in this example!
+    // この例ではクエリーが構築されない!
     $results = $articles->find()
         ->order(['title' => 'DESC'])
         ->formatResults(function ($results) {
