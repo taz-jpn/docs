@@ -290,30 +290,35 @@ findメソッドからクエリーオブジェクトが返ることは、いく�
 持つメソッドを単純に定義することで、ファインダーは自動的に、ビヘイビアが接続され
 ている全てのテーブル上で利用可能になります。
 
-Recursive and ContainableBehavior Removed
+RecursiveとContainableBehaviorは削除しました
 -----------------------------------------
 
-In previous versions of CakePHP you needed to use ``recursive``,
-``bindModel()``, ``unbindModel()`` and ``ContainableBehavior`` to reduce the
-loaded data to the set of associations you were interested in. A common tactic
-to manage associations was to set ``recursive`` to ``-1`` and use Containable to
-manage all associations. In CakePHP 3.0 ContainableBehavior, recursive,
-bindModel, and unbindModel have all been removed. Instead the ``contain()``
-method has been promoted to be a core feature of the query builder. Associations
-are only loaded if they are explicitly turned on. For example::
+旧バージョンのCakePHPににおいて、アソシエーションのセットにロードされたデータを減
+らすために、あなたが興味を持っていた ``recursive``, ``bindModel()``, 
+``unbindModel()`` および ``ContainableBehavior`` を使う必要がありました。アソシ
+エーションを管理するための一般的な手法は、 ``recursive`` に ``-1`` をセットしたり、
+全てのアソシエーションを管理するためには、Containableを使いました。 CakePHP 3.0に
+おいて、ContainableBehavior, recursive, bindModel および unbindModelは全て削除
+されています。代わりに ``contain()`` メソッドがクエリービルダーのコア機能に昇格
+されました。アソシエーションは、明示的にオンになっている場合にだけ読み込まれます。
+例えば::
 
     $query = $this->Articles->find('all');
 
-Will **only** load data from the ``articles`` table as no associations have been
-included. To load articles and their related authors you would do::
+この場合は、アソシエーションが含まれない場合は、 ``articles`` テーブルから ** のみ **
+読み込まれます。記事とその関連作者を読み込むためには、次のようになるでしょう::
 
     $query = $this->Articles->find('all')->contain(['Authors']);
 
-By only loading associated data that has been specifically requested you spend
-less time fighting the ORM trying to get only the data you want.
+明確に要求されたアソシエーションデータだけを読み込むことによって、必要なデーター
+だけを取得しようとするので、ORMと格闘するのに費やすのは僅かな時間です。
 
-No afterFind Event or Virtual Fields
+afterFindイベントとバーチャルフィールドは無い
 ------------------------------------
+
+旧バージョンのCakePHPにおいて、あなたは、任意のデータープロパティをするために
+``afterFind`` コールバックとバーチャルフィールドを広く利用する必要があった。
+これらの機能は、3.0において削除されました。
 
 In previous versions of CakePHP you needed to make extensive use of the
 ``afterFind`` callback and virtual fields in order to create generated data
