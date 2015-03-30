@@ -318,16 +318,12 @@ afterFindイベントとバーチャルフィールドは無い
 
 旧バージョンのCakePHPにおいて、あなたは、任意のデータープロパティをするために
 ``afterFind`` コールバックとバーチャルフィールドを広く利用する必要があった。
-これらの機能は、3.0において削除されました。
-
-In previous versions of CakePHP you needed to make extensive use of the
-``afterFind`` callback and virtual fields in order to create generated data
-properties. These features have been removed in 3.0. Because of how ResultSets
-iteratively generate entities, the ``afterFind`` callback was not possible.
-Both afterFind and virtual fields can largely be replaced with virtual
-properies on entities. For example if your User entity has both first and last
-name columns you can add an accessor for `full_name` and generate the property
-on the fly::
+これらの機能は、3.0において削除されました。ResultSetsがエンティティーを反復的に
+構築する方法は、 ``afterFind`` のコールバックでは不可能であるためです。
+afterFindとバーチャルフィールドの両方共に、エンティティーのバーチャルプロパティ
+へ大々的に置き換えることができました。例えば、あなたのUserエンティティーが、姓と名
+の両方のカラムを持つなら、 `full_name` 用のaccessorを追加することができ、その場で
+生成できます::
 
     namespace App\Model\Entity;
 
@@ -341,15 +337,14 @@ on the fly::
         }
     }
 
-Once defined you can access your new property using ``$user->full_name``.
-Using the :ref:`map-reduce` features of the ORM allow you to build aggregated
-data from your results, which is another use case that the ``afterFind``
-callback was often used for.
+一度定義すれば、あなたは、 ``$user->full_name`` を使って新しいプロパティにアクセ
+スできます。ORMの :ref:`map-reduce` 機能を使うと、集約されたデーターを結果から構
+築できるようになります、これは、 ``afterFind`` コールバックの使い道として多く使わ
+れた方法でした。
 
-While virtual fields are no longer an explicit feature of the ORM, adding
-calculated fields is easy to do in your finder methods. By using the query
-builder and expression objects you can achieve the same results that virtual
-fields gave::
+一方バーチャルフィールドはORMの明示的な機能ではなくなりました、ファインダーメソッ
+ドにおいてcalculatedフィールドを追加することが簡単にできます。クエリービルダーと
+表現オブジェクトを使うことによって、バーチャルフィールドと同じ結果に到達できます::
 
     namespace App\Model\Table;
 
@@ -366,9 +361,14 @@ fields gave::
         }
     }
 
-Associations No Longer Defined as Properties
+関連付けはプロパティに定義されなくなくなりました。
 --------------------------------------------
 
+旧バージョンのCakePHPにおいて、モデルが持っていた様々な関連付けは、
+``$belongsTo`` や ``$hasMany`` のようなプロパティにて定義されていました。
+CakePHP 3.0において、関連付はメソッドとして構築されました。メソッドを使うことは
+クラス定義による多くの制限を回避できるようにします、関連付けのためのただひとつだ
+けの方法を提供します。 ``initialize()`` メソッドと、アプリケーションコードの
 In previous versions of CakePHP the various associations your models had were
 defined in properties like ``$belongsTo`` and ``$hasMany``. In CakePHP 3.0,
 associations are created with methods. Using methods allows us to sidestep the
