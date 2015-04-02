@@ -410,15 +410,12 @@ CakePHPのもう一つの歓迎すべき向上点は、自作のアソシエー�
 
 アソシエーションのように、バリデーションルールは旧バージョンのCakePHPにおいては
 クラスのプロパティとして定義されていました。そしてこの配列は ``ModelValidator`` 
-オブジェクトにすっかり姿を変えました。この改変の過程は
-Like associations, validation rules were defined as a class property in previous
-versions of CakePHP. This array would then be lazily transformed into
-a ``ModelValidator`` object. This transformation step added a layer of
-indirection, complicating rule changes at runtime. Futhermore, validation rules
-being defined as a property made it difficult for a model to have multiple sets
-of validation rules. In CakePHP 3.0, both these problems have been remedied.
-Validation rules are always built with a ``Validator`` object, and it is trivial
-to have multiple sets of rules::
+オブジェクトにすっかり姿を変えました。この改変のステップは、実行時の複雑なルール
+を変更する間接のレイヤーを追加しました。さらに、バリデーションルールは、プロパティ
+として定義されていたことで、複数セットのバリデーション持つモデルを難しくしていま
+した。CakePHP 3.0 はこの両方の問題を改善しています。バリデーションルールは常に
+ ``Validator`` オブジェクトとして構築します、それは複数セットのルールをもつことを
+ 簡単にします::
 
     namespace App\Model\Table;
 
@@ -444,27 +441,27 @@ to have multiple sets of rules::
 
     }
 
-You can define as many validation methods as you need. Each method should be
-prefixed with ``validation`` and accept a ``$validator`` argument.
+あなたは、多くのバリデーションルールを思い通りに定義できます。それぞれのメソッドは
+``validation`` プレフィックスを持ち、 ``$validator`` 引数を許可します。
 
-In previous versions of CakePHP 'validation' and the related callbacks covered
-a few related but different uses. In CakePHP 3.0, what was formerly called
-validation is now split into two concepts:
+旧バージョンのCakePHPにおいて'validation'と関連するコールバックは、いくつかの関連
+付をカバーしましたが、使い道が違います。CakePHP 3.0 において、正式なバリデー
+ションは、２つのコンセプトに分かれます:
 
-#. Data type and format validation.
-#. Enforcing application, or business rules.
+#. データータイプおよび形式の検証。
+#. アプリケーションとビジネスルールへの施行
 
-Validation is now applied before ORM entities are created from request data.
-This step lets you ensure data matches the data type, format, and basic shape
-your application expects. You can use your validators when converting request
-data into entities by using the ``validate`` option. See the documentation on
-:ref:`converting-request-data` for more information.
+バリデーションは、リクエストデーターから作られたORMエンティティーの前に追加され
+ます。このステップは、データータイプ、形式、アプリケーションが期待する基本形を
+保証します。あなたは、リクエストデーターをエンティティに変換する際に、
+``validate`` オプションを使うことで、バリデーターを使うことができます。詳しくは
+:ref:`converting-request-data` のドキュメントを参照して下さい。
 
-:ref:`Application rules <application-rules>` allow you to define rules that
-ensure your application's rules, state and workflows are enforced. Rules are
-defined in your Table's ``buildRules()`` method. Behaviors can add rules using
-the ``buildRules()`` hook method. An example ``buildRules()`` method for our
-articles table could be::
+:ref:`Application rules <application-rules>` は、アプリケーションのルールと状態
+およびワークフローの施行を保証する、ルールの定義を許可します。ルールはテーブルの
+ ``buildRules()`` メソッドにてい定義されます。ビヘイビアはe ``buildRules()`` 
+フックメソッドを使ってルールを追加できます。我々の articlesテーブルにおける
+``buildRules()`` メソッドの例は、次のようになります::
 
     // In src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
