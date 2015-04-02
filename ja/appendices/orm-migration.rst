@@ -368,7 +368,8 @@ afterFindとバーチャルフィールドの両方共に、エンティティ�
 ``$belongsTo`` や ``$hasMany`` のようなプロパティにて定義されていました。
 CakePHP 3.0において、関連付はメソッドとして構築されました。メソッドを使うことは
 クラス定義による多くの制限を回避できるようにします、関連付けのためのただひとつだ
-けの方法を提供します。 ``initialize()`` メソッドと、アプリケーションコードの
+けの方法を提供します。 ``initialize()`` メソッドと、あなたの他全てのアプリケー
+ションコードは、アソシエーションを操作する際に、同じAPIを対話します::
 In previous versions of CakePHP the various associations your models had were
 defined in properties like ``$belongsTo`` and ``$hasMany``. In CakePHP 3.0,
 associations are created with methods. Using methods allows us to sidestep the
@@ -394,19 +395,22 @@ code, interact with the same API when manipulating associations::
 
     }
 
-As you can see from the example above each of the association types uses
-a method to create the association. One other difference is that
-``hasAndBelongsToMany`` has been renamed to ``belongsToMany``. To find out more
-about creating associations in 3.0 see the section on :doc:`/orm/associations`.
+ご覧のように上の例は、アソシエーションのそれぞれのタイプは、アソシエーションを
+構築するためのメソッドとして使います。もう一つの違いは、``hasAndBelongsToMany`` 
+が ``belongsToMany`` にリネームされたことです。3.0のアソシエーション構築について
+もっと知りたい場合は、 :doc:`/orm/associations` セクションを参照して下さい。
 
-Another welcome improvement to CakePHP is the ability to create your own
-association classes. If you have association types that are not covered by the
-built-in relation types you can create a custom ``Association`` sub-class and
-define the association logic you need.
+CakePHPのもう一つの歓迎すべき向上点は、自作のアソシエーションクラスを構築出来る
+ことです。ビルトインのリレーションタイプがカバーしていないアソシエーションタイプ
+がある場合、あなたはカスタム ``Association`` サブクラスを構築することができ、
+あなたが作りたいロジックのアソシエーションを定義できます。
 
-Validation No Longer Defined as a Property
+バリデーションはプロパティ定義ではなくなった
 ------------------------------------------
 
+アソシエーションのように、バリデーションルールは旧バージョンのCakePHPにおいては
+クラスのプロパティとして定義されていました。そしてこの配列は ``ModelValidator`` 
+オブジェクトにすっかり姿を変えました。この改変の過程は
 Like associations, validation rules were defined as a class property in previous
 versions of CakePHP. This array would then be lazily transformed into
 a ``ModelValidator`` object. This transformation step added a layer of
