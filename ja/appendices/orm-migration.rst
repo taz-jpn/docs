@@ -488,9 +488,11 @@ CakePHPのもう一つの歓迎すべき向上点は、自作のアソシエー�
         }
     }
 
-Identifier Quoting Disabled by Default
+デフォルトで識別子のクウォート無効
 --------------------------------------
 
+旧バージョンのCakePHPにおいては、常に識別子はクウォートされていました。SQLスニ
+ペットの解析と識別子のクウォートをしようとする
 In the past CakePHP has always quoted identifiers. Parsing SQL snippets and
 attempting to quote identifiers was both error prone and expensive. If you are
 following the conventions CakePHP sets out, the cost of identifier quoting far
